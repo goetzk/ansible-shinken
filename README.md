@@ -1,7 +1,8 @@
-Role Name
-=========
+Shinken
+=======
 
-A brief description of the role goes here.
+This role is to install Shinken and configure your hosts and services.
+Currently at an early stage and not quite ready for other peoples networks.
 
 Requirements
 ------------
@@ -30,9 +31,11 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+GPL2+
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Issues or feedback can be reported to the author at karl@kgoetz.id.au; please
+prefix the subject with 'ansible' or 'role'.
+

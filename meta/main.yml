@@ -1,23 +1,16 @@
 ---
 galaxy_info:
-  author: your name
-  description: 
-  company: your company (optional)
-  # Some suggested licenses:
-  # - BSD (default)
-  # - MIT
-  # - GPLv2
-  # - GPLv3
-  # - Apache
-  # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
+  author: Karl Goetz
+  description: Configure Shinken to monitor your network
+  # company: your company (optional)
+  license: GPLv2
   min_ansible_version: 1.2
   #
   # Below are all platforms currently available. Just uncomment
   # the ones that apply to your role. If you don't see your 
   # platform on this list, let us know and we'll get it added!
   #
-  #platforms:
+  platforms:
   #- name: EL
   #  versions:
   #  - all
@@ -101,21 +94,9 @@ galaxy_info:
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
   #
-  #categories:
-  #- cloud
-  #- cloud:ec2
-  #- cloud:gce
-  #- cloud:rax
-  #- clustering
-  #- database
-  #- database:nosql
-  #- database:sql
-  #- development
-  #- monitoring
-  #- networking
-  #- packaging
-  #- system
-  #- web
+  categories:
+  - monitoring
+  - system
 dependencies: []
   # List your role dependencies here, one per line. Only
   # dependencies available via galaxy should be listed here.
