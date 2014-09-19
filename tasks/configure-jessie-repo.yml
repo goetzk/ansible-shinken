@@ -1,0 +1,4 @@
+# This should only be used while installing shinken
+- name: Enable jessie (testing) for package installs
+  copy: content='deb http://ftp.iinet.net.au/debian/debian/ jessie main' dest=/var/lib/ansible/jessie.sources.list group=root owner=root
+

@@ -1,0 +1,7 @@
+---
+# From http://debian.piwik.org/
+# http://piwik.org/blog/2014/04/piwik-debian-package/
+
+- name: Make log import script executable
+  file: path=/usr/share/piwik/misc/log-analytics/import_logs.py mode=755
+

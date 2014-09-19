@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+###############################################################################
+#
+# HOST DEFINITION
+#
+###############################################################################
+
+# Define a host for the local machine
+define host{
+    use                     linux
+    host_name               {{ item.hostname }}
+    address                 {{ item.hostname }}
+{% if item.parent != '' %}
+    parents                 {{ item.parent }}
+{% endif %}
+}
+

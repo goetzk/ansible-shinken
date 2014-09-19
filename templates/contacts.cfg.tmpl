@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+define contact{
+    use             generic-contact
+    contact_name    {{ shinken_config_contacts_name }}
+    email           {{ shinken_config_contacts_email }}
+    pager           0600000000   ; contact phone number
+    password        {{ shinken_config_contacts_password }}
+    is_admin        1
+}
+

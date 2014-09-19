@@ -1,0 +1,4 @@
+# Broker didn't do what i wanted, lets try restarting arbiter
+- name: restart shinken arbiter
+  service: name=shinken-arbiter state=restarted
+

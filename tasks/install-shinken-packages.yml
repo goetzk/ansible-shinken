@@ -1,0 +1,10 @@
+- name: Install shinken including web UI
+  command: apt-get -o Dir::Etc::SourceParts=/var/lib/ansible/jessie.sources.list install {{ item }}
+    creates=/etc/init.d/shinken
+  with_items:
+  - shinken
+  - shinken-module-arbiter-hotdependencies
+
+- name: Allow bi directional HTTP access to shinken frontend on 7767
+  ufw: rule=allow port=7767 proto=tcp
+

@@ -1,0 +1,6 @@
+- name: Set up Shinken web ui
+  template: src=broker-webui.cfg.tmpl dest=/etc/shinken/shinken-specific/broker-webui.cfg
+    owner=root group=root mode=444
+  notify:
+  - restart shinken broker
+  
