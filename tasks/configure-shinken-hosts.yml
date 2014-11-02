@@ -6,6 +6,6 @@
   with_items:
     - loop over hosts here
   notify:
-  - restart shinken broker
+  - restart shinken arbiter
 
 

@@ -5,5 +5,5 @@
     dest=/etc/shinken/contacts.cfg
     mode=640
   notify:
-  - restart shinken broker
+  - restart shinken arbiter
 
