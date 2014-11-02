@@ -1,7 +1,7 @@
 - name: Install hosts.cfg
 #   copy: src=shinken-hosts/ dest=/etc/shinken/hosts/
   template: user=root owner=root
-    src=shinken-hosts.tmpl
+    src=hosts.tmpl
 # how do we get loop to pass in items?
   with_items:
     - loop over hosts here

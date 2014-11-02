@@ -2,7 +2,7 @@
 - name: Create configuration for hosts to monitor
   template:
     dest=/etc/shinken/hosts/{{ hostvars[item]['ansible_hostname'] }}.cfg
-    src=shinken-hosts.tmpl
+    src=hosts.tmpl
   when: hostvars[item]['ansible_hostname'] is defined
   with_items: shinken_targets
 
