@@ -1,0 +1,36 @@
+# {{ ansible_managed }}
+## Module:      WebUI
+## Loaded by:   Broker
+# The Shinken web interface and integrated web server.
+define module {
+    module_name     WebUI
+    module_type     webui
+    host            {{ shinken_broker_webui_host }}     ; All interfaces = 0.0.0.0
+    port            {{ shinken_broker_webui_port }}
+    auth_secret		{{ shinken_broker_webui_auth_secret }}
+    # Allow or not the html characters in plugins output
+    # WARNING: so far, it can be a security issue
+    allow_html_output  0
+
+    # Option welcome message
+    #login_text             Welcome to ACME Shinken WebUI.
+
+    #http_backend    auto
+    # ; can be also: wsgiref, cherrypy, paste, tornado, twisted
+    # ; or gevent. auto means best match in the system.
+
+    modules          Apache_passwd,ActiveDir_UI,Cfg_password,Mongodb
+
+    # Modules available for the WebUI:
+    #
+    #   Note: Choose one or more authentication methods.
+    #
+    #   Apache_passwd: use an Apache htpasswd files for auth
+    #   ActiveDir_UI: use AD for auth and photo collect
+    #   Cfg_password: use passwords in contacts configuration for authentication
+    #
+    #   PNP_UI: Use PNP graphs in the UI
+    #   GRAPHITE_UI: Use graphs from Graphite
+    #
+    #   Mongodb: Necessary for enabling user preferences in WebUI
+}

@@ -1,10 +1,15 @@
-- name: Install shinken including web UI
-  command: apt-get -o Dir::Etc::SourceParts=/var/lib/ansible/jessie.sources.list install {{ item }}
-    creates=/etc/init.d/shinken
-  with_items:
-  - shinken
-  - shinken-module-arbiter-hotdependencies
+---
+- name: Install Shinken from OS packages
+  when: shinken_install_from == "packages"
+  package: 
+    name: shinken
+    state: present
 
-- name: Allow bi directional HTTP access to shinken frontend on 7767
-  ufw: rule=allow port=7767 proto=tcp
+- name: Install Shinken using pip
+  when: shinken_install_from == "pip"
+  pip: 
+    name: Shinken
+    state: present
+#    virtualenv: "{{ shinken_virtualenv }}"
+#    virtualenv_site_packages: yes
 

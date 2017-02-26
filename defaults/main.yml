@@ -1,30 +1,52 @@
 ---
+
+# How should things be installed, 'packages' or 'pip'
+shinken_install_from: 'pip'
+
+# Where pip will install packages
+shinken_virtualenv: /srv/shinken/environment
+
+# Path of broker configuration
+shinken_config_broker: /etc/shinken/brokers/
+
+# Do we want the web UI?
+shinken_enable_web_ui2: true
+
+# List of modules to enable in the broker. 'webui2' enables web interface.
+shinken_broker_modules: 'webui2'
+
 # Shinken web UI configuration, only changed items are here so far.
 shinken_broker_webui_host: 0.0.0.0
 shinken_broker_webui_port: 7767
-shinken_broker_webui_auth_secret: SiteSpecificAuthSecret
+shinken_broker_webui_auth_secret: SiteSpecificAuthSecret # MUST BE CHANGED
 
-# Details of the administrator contact.
-shinken_config_contacts_name: admin
-shinken_config_contacts_email: shinken@localhost
-shinken_config_contacts_password: password
+# Where are contacts placed
+shinken_config_contacts: /etc/shinken/contacts/
+
+# Details of the available contacts (include password for internal authentication)
+shinken_contacts:
+ - contact_name: 'admin'
+   email: 'shinken@localhost'
+   password: 'password'
+   is_admin: 1
+   expert: 1
+   can_submit_commands: 1
+#  - { contact_name: 'guest', email: 'guest@localhost', password: 'password'}
+
+# where does service configuration go?
+shinken_config_services: /etc/shinken/services/
+
+# What services are we monitoring?
+shinken_services:
+ - { service_description: 'ping test', command: 'check_ping', hostgroup_name: [] }
 
 # Where should the host configuration go
 shinken_config_hosts: /etc/shinken/hosts/
-# where do service configuration go?
-shinken_config_services: /etc/shinken/services/
+shinken_config_hostgroups: /etc/shinken/hostgroups/
+
 # Which hosts are we monitoring?
-shinken_targets:
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-# What services are we monitoring?
-shinken_services:
- - { }
+shinken_hosts:
+ - { host_name: 'router.local' , hostgroups: [ 'infrastructure' ]}
+ - { host_name: 'modem.local', parent: 'router.local', hostgroups: [ 'appliances' ] }
+ - { host_name: 'shinken.io', parent: 'modem.local', hostgroups: [ 'remote-server', 'web-server' ] }
 

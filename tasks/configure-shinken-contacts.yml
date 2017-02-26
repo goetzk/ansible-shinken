@@ -1,9 +1,0 @@
-# This doubles as the login details
-- name: Configure shinken admin user and login
-  template:
-    src=contacts.cfg.tmpl
-    dest=/etc/shinken/contacts.cfg
-    mode=640
-  notify:
-  - restart shinken arbiter
-

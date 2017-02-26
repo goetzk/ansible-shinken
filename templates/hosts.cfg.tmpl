@@ -1,0 +1,30 @@
+# {{ ansible_managed }}
+
+define host{
+    {# loop through all key:value pairs and print out the results #}
+    {% for key, value in item.iteritems() %}
+
+    {% if key == 'use' %}
+      {% if key is defined %}
+        {{ key }}       {{ value }}
+      {% else %}
+        {{ key }}             generic-host
+      {% endif %}
+    {% elif key == 'parent' %}
+        {% if value %}
+        # Parent nodes of this host
+        parents                 {{ value }}
+        {% endif %}
+    {% elif key == 'contact_groups' %}
+       # Contact groups this host is a member of
+        contact_groups                {{ value | join(",") }}
+    {% elif key == 'hostgroups' %}
+       # Hostgroups this host is a member of
+        hostgroups                {{ value | join(",") }},all
+    {% else %}
+    {# Guess none of the special cases apply here #}
+        {{ key }}      {{ value }}
+    {% endif %}
+    {% endfor %}
+}
+

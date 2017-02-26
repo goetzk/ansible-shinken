@@ -1,9 +1,10 @@
 ---
-# Couldn't get pinning working so i've had to do this the long and work aroundy way
-- include: configure-jessie-repo.yml
+- include: prepare-for-install.yml
+
 - include: install-shinken-packages.yml
 
+- include: configure-shinken.yml
+
 - include: configure-shinken-webui.yml
-- include: configure-shinken-contacts.yml
-- include: configure-shinken-hosts.yml
+  when: "{{ shinken_enable_web_ui2 }}"
 

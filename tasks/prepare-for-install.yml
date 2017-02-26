@@ -1,0 +1,31 @@
+---
+- name: Create shinken group
+  user:
+    name: shinken
+    system: yes
+
+- name: Create shinken user
+  user:
+    name: shinken
+    comment: Created by ansible-shinken
+    group: shinken
+    system: yes
+
+# - name: Create directory for shinken to be installed to
+#   when: shinken_install_from == "pip"
+#   file:
+#     path: "{{ shinken_virtualenv }}"
+#     state: directory
+
+# Required by shinken http_client but not pulled in as a dependency
+- name: Install python-pycurl
+  package:
+    name: python-pycurl
+    state: present
+
+# needed to install shinken and its web ui
+- name: Install python-pip
+  package:
+    name: python-pip
+    state: present
+

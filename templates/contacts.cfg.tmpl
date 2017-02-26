@@ -1,10 +1,24 @@
 # {{ ansible_managed }}
 define contact{
-    use             generic-contact
-    contact_name    {{ shinken_config_contacts_name }}
-    email           {{ shinken_config_contacts_email }}
-    pager           0600000000   ; contact phone number
-    password        {{ shinken_config_contacts_password }}
-    is_admin        1
+    {# loop through all key:value pairs and print out the results #}
+    {% for key, value in item.iteritems() %}
+
+    {% if key == 'use' %}
+      {% if key is defined %}
+        {{ key }}       {{ value }}
+      {% else %}
+        {{ key }}             generic-contact
+      {% endif %}
+    {% elif key == 'contact_name' %}
+      {% if key is defined %}
+        {{ key }}       {{ value }}
+      {% else %}
+        {{ key }}             {{ value |mandatory }}
+      {% endif %}
+    {% else %}
+    {# Guess none of the special cases apply here #}
+        {{ key }}      {{ value }}
+    {% endif %}
+    {% endfor %}
 }
 

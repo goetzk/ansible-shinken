@@ -1,6 +1,46 @@
-- name: Set up Shinken web ui
-  template: src=broker-webui.cfg.tmpl dest=/etc/shinken/shinken-specific/broker-webui.cfg
-    owner=root group=root mode=444
+---
+# https://github.com/shinken-monitoring/mod-webui/wiki/Installation
+
+# - name: Install Web UI configuration
+#   template: src=webui-module.cfg.tmpl dest=/etc/shinken/modules/broker-webui.cfg
+#     owner=root group=root mode=444
+#   notify:
+#   - restart shinken broker
+#   - restart shinken arbiter
+
+# A 'with items' doesn't work here for some reason
+- name: Install webui2 python dependencies
+  pip:
+    state: present
+    name: "pymongo>=3.0.3 passlib requests arrow bottle==0.12.8"
+#     virtualenv: {{ shinken_virtualenv }}
+
+- name: Install mongodb for storing WebUI user preferences
+  package:
+    name: mongodb
+    state: present
+
+- name: Set up Shinken CLI
+  become: true
+  become_user: shinken
+  command: shinken --init
+  args:
+    creates: /home/shinken/.shinken.ini
+
+- name: Install Shinken WebUI 2
+  become: true
+  become_user: shinken
+  command: shinken install webui2
+  args:
+    creates: /etc/shinken/modules/webui2.cfg
+
+- name: Change broker-master configuration
+  lineinfile:
+    dest={{ shinken_config_broker }}/broker-master.cfg
+    state=present
+    regexp='.*[^#] modules.*'
+    line="    modules {{ shinken_broker_modules }}"
   notify:
   - restart shinken broker
-  
+  - restart shinken arbiter
+

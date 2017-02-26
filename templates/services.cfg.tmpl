@@ -1,0 +1,27 @@
+# {{ ansible_managed }}
+
+define service{
+    {# loop through all key:value pairs and print out the results #}
+    {% for key, value in item.iteritems() %}
+    {% if key == 'use' %}
+      {% if key is defined %}
+        {{ key }}       {{ value }}
+      {% endif %}
+    {% elif key == 'check_command' %}
+      {% if key is defined %}
+        {{ key }}       {{ value }}
+      {% else %}
+        check_command   this value is required and was not set in ansible
+      {% endif %}
+    {% elif key == 'hostgroup_name' %}
+    {{ key }}       {{ value |join(",") }}
+    {% else %}
+        {# Guess none of the special cases apply here #}
+        {{ key }}      {{ value }}
+    {% endif %}
+    {% endfor %}
+    {# We can have multiple sources but its good to have this one as default. Fills in any gaps left by supplied #}
+    use                  generic-service
+    hostgroup_name       all
+}
+

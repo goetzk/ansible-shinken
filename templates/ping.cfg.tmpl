@@ -1,9 +1,0 @@
-# {{ ansible_managed }}
-
-# Define a service to "ping" the local machine
-define service{
-        use                             generic-service         ; Name of service template to use
-        host_name                       medeopolis.com
-        service_description             PING
-        check_command                   {{ shinken_cfg_ping_check_command |default('check_ping!100.0,20%!500.0,60%') }}
-        }

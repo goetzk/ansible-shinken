@@ -1,0 +1,47 @@
+---
+
+- name: Configure shinken users for contact and authentication
+  with_items: "{{ shinken_contacts }}"
+  template:
+    src=contacts.cfg.tmpl
+    dest={{ shinken_config_contacts }}/{{ item.contact_name |mandatory }}.cfg
+    mode=640
+  notify:
+  - restart shinken arbiter
+
+- name: Create configuration for services to monitor
+  with_items: "{{ shinken_services }}"
+  template:
+    dest={{ shinken_config_services }}/{{ item.service_description|replace(' ', '_') }}.cfg
+    src=services.cfg.tmpl
+  notify:
+  - restart shinken arbiter
+
+- name: Create configuration for hosts to monitor (without services)
+  with_items: "{{ shinken_hosts }}"
+  template:
+    dest={{ shinken_config_hosts }}/{{ item.host_name }}.cfg
+    src=hosts.cfg.tmpl
+  notify:
+  - restart shinken arbiter
+
+# Following Jinja magic thanks to mikecee
+- name: Build list of hostgroups
+  set_fact:
+    hglist="{{ shinken_hosts | sum(attribute='hostgroups', start=[]) | unique }}"
+
+- name: Create configuration for hostgroups
+  with_items: "{{ hglist }}"
+  template:
+    dest={{ shinken_config_hostgroups }}/{{ item }}.cfg
+    src=hostgroups.cfg.tmpl
+  notify:
+  - restart shinken arbiter
+
+- name: Install 'all' hostgroup
+  template:
+    dest={{ shinken_config_hostgroups }}/all.cfg
+    src=hostgroups-all.cfg.tmpl
+  notify:
+  - restart shinken arbiter
+
