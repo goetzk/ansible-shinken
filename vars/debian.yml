@@ -1,0 +1,11 @@
+---
+shinken_monitoring_plugins:
+  - monitoring-plugins
+  - nagios-plugins-contrib
+
+shinken_pycurl_build_deps:
+ - libcurl4-openssl-dev
+ - build-essential
+ - python-dev
+ - libssl-dev
+

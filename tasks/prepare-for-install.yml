@@ -17,15 +17,20 @@
 #     path: "{{ shinken_virtualenv }}"
 #     state: directory
 
-# Required by shinken http_client but not pulled in as a dependency
-- name: Install python-pycurl
-  package:
-    name: python-pycurl
-    state: present
-
 # needed to install shinken and its web ui
 - name: Install python-pip
   package:
     name: python-pip
     state: present
 
+- name: Gather OS specific variables
+  include_vars: "{{ ansible_os_family|lower }}.yml"
+
+# For performing various checks
+# FIXME: this will need tweaking to support centos.
+- name: Install check dependencies
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - "{{ shinken_monitoring_plugins }}"

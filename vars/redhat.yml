@@ -1,0 +1,8 @@
+---
+shinken_monitoring_plugins:
+ - nagios-plugins
+ - nagios-plugins-all
+
+shinken_pycurl_build_deps:
+ - libcurl-devel
+

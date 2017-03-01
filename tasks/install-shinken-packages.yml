@@ -5,6 +5,30 @@
     name: shinken
     state: present
 
+- name: Install build dependencies for pycurl
+  when: shinken_install_from == "pip"
+  when: ansible_os_family == "Debian"
+  package:
+    name: "{{ shinken_pycurl_build_deps }}"
+    state: present
+
+
+- name: Install runtime dependencies where required
+  when: ansible_os_family == "Redhat"
+  package:
+    name: redhat-lsb-core
+    state: present
+
+- name: Install pycurl using pip
+  when: shinken_install_from == "pip"
+  when: ansible_os_family == "Debian"
+  pip: 
+    name: pycurl
+    version: 7.43.0
+    state: present
+#    virtualenv: "{{ shinken_virtualenv }}"
+#    virtualenv_site_packages: yes
+
 - name: Install Shinken using pip
   when: shinken_install_from == "pip"
   pip: 
