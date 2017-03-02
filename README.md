@@ -2,14 +2,18 @@ Shinken
 =======
 
 This role is to install Shinken and configure your hosts and services.
-Currently at an early stage and not quite ready for other peoples networks.
-
-virtualenv support was coded but since shinken doesn't play nicely in a
-virtualenv those code paths have been disabled.
 
 Requirements
 ------------
 
+If installing through pip, no external dependencies should be required.
+
+This role has been tested on:
+- Debian Jessie (8.4)
+- Centos 6.8
+- Amazon Linux AMI release 2016.09
+
+It is likely to work on others (eg Ubuntu, RedHat, Fedora, ...), it simply hasn't been run there by me.
 
 Role Variables
 --------------
@@ -70,22 +74,19 @@ have not been implemented yet)
      - { host_name: 'shinken.io', parent: 'modem.local', hostgroups: [ 'remote-server', 'web-server' ] }
 
 
-Dependencies
-------------
-
-This module requires epel on centos for virtualenvs and shinken packages. Roles
-to perform these tasks are below, but any roles / tasks to organise the
-dependenies will work.
-
-    ansible-galaxy install wtanaka.virtualenv
-    ansible-galaxy install geerlingguy.repo-epel
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: shinken
+    - hosts: monitoring
+      vars:
+        shinken_hosts:
+         - { host_name: 'router.local' , hostgroups: [ 'infrastructure' ]}
+         - { host_name: 'modem.local', parent: 'router.local', hostgroups: [ 'appliances' ] }
+        shinken_contacts:
+         - { contact_name: 'guest', email: 'guest@localhost', password: 'password'}
       roles:
          - { role: goetz.shinken, shinken_broker_modules: webui2 }
 
