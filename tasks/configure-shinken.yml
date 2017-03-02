@@ -49,8 +49,8 @@
   when: ansible_os_family == "RedHat"
   lineinfile:
     dest: /etc/shinken/resource.d/paths.cfg
-    regexp: $NAGIOSPLUGINSDIR$=/usr/lib/nagios/plugins
-    line: $NAGIOSPLUGINSDIR$=/usr/lib64/nagios/plugins
+    regexp: '\$NAGIOSPLUGINSDIR\$=/usr/lib.*'
+    line: '$NAGIOSPLUGINSDIR$=/usr/lib64/nagios/plugins'
     state: present
   notify:
   - restart shinken arbiter
