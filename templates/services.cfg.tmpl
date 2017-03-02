@@ -22,6 +22,8 @@ define service{
     {% endfor %}
     {# We can have multiple sources but its good to have this one as default. Fills in any gaps left by supplied #}
     use                  generic-service
-    hostgroup_name       all
+    {% if item.hostgroup_name is not defined %}
+        hostgroup_name       all
+    {% endif %}
 }
 
