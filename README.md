@@ -53,8 +53,11 @@ have not been implemented yet)
     shinken_config_services: /etc/shinken/services/
 
     # What services are we monitoring? which hostgroups do they apply to?
+    # NOTE: hostgroup_name missing means the test will be applied to ALL hostgroups.
+    # To apply to all except a subset of hosts use hostgroup_name: [ 'all!excludeme' ]
     shinken_services:
-     - { service_description: 'ping test', command: 'check_ping', hostgroup_name: [] }
+     - { service_description: 'ping test', command: 'check_ping' }
+     - { service_description: 'port 80 test', command: 'check_tcp!80', hostgroup_name: ['webservers', 'proxies'] }
 
     # Where should the host configuration go
     shinken_config_hosts: /etc/shinken/hosts/
@@ -84,7 +87,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: shinken
       roles:
-         - { role: goetz.shinken, shinken_broker_modules: webui }
+         - { role: goetz.shinken, shinken_broker_modules: webui2 }
 
 License
 -------
