@@ -28,9 +28,6 @@ have not been implemented yet)
     # Path of broker configuration
     shinken_config_broker: /etc/shinken/brokers/
 
-    # Do we want the web UI?
-    shinken_enable_web_ui2: true
-
     # List of modules to enable in the broker. 'webui2' enables web interface.
     shinken_broker_modules: 'webui2'
 

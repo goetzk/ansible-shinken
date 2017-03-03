@@ -6,5 +6,5 @@
 - include: configure-shinken.yml
 
 - include: configure-shinken-webui.yml
-  when: "{{ shinken_enable_web_ui2 }}"
+  when: '"webui2" in shinken_broker_modules'
 
