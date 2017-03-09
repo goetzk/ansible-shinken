@@ -3,20 +3,14 @@ define contact{
     {# loop through all key:value pairs and print out the results #}
     {% for key, value in item.iteritems() %}
 
-    {% if key == 'use' %}
-      {% if key is defined %}
-        {{ key }}       {{ value }}
-      {% else %}
-        {{ key }}             generic-contact
-      {% endif %}
-    {% elif key == 'contact_name' %}
+    {% if key == 'contact_name' %}
       {% if key is defined %}
         {{ key }}       {{ value }}
       {% else %}
         {{ key }}             {{ value |mandatory }}
       {% endif %}
     {% else %}
-    {# Guess none of the special cases apply here #}
+    {# Special case doesn't apply here #}
         {{ key }}      {{ value }}
     {% endif %}
     {% endfor %}
