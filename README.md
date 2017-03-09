@@ -84,6 +84,16 @@ Including an example of how to use your role (for instance, with variables passe
          - { host_name: 'modem.local', parent: 'router.local', hostgroups: [ 'appliances' ] }
         shinken_contacts:
          - { contact_name: 'guest', email: 'guest@localhost', password: 'password'}
+         - contact_name: 'admin'
+           email: 'admin@example.com'
+           pager: '+12312312312'
+           password: 'something here'
+           is_admin: 1
+           expert: 1
+           can_submit_commands: 1
+           host_notifications_enabled: 1
+           service_notifications_enabled: 1
+           notificationways: 'email'
       roles:
          - { role: goetz.shinken, shinken_broker_modules: webui2 }
 
