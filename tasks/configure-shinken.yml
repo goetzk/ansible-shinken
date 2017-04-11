@@ -9,6 +9,31 @@
   notify:
   - restart shinken arbiter
 
+# Following Jinja magic thanks to mikecee
+# - name: Build list of admin users
+#   set_fact:
+#     admin_users="{{ shinken_contacts | sum(attribute='is_admin', start=[]) | unique }}"
+
+# - debug:
+#     msg: "{{ shinken_contacts.0 }}"
+#
+# - name: Populate admins list
+#   set_fact:
+#     admin_users: "{{ admin_users|default([]) | combine( item.name ) }}"
+#   with_items: shinken_contacts
+#   when: item.is_admin == 1
+#
+# - name: Install admins contact group
+# #   with_items: "{{ admin_users }}"
+#   with_items: "{{ shinken_contacts }}"
+#   template:
+#     src: contactgroup-admin.cfg.tmpl
+#     dest: /etc/shinken/contactgroups/admin.cfg
+#   notify:
+#   - restart shinken arbiter
+
+# TODO: after figuring out admins, do that for users too
+
 - name: Create configuration for services to monitor
   with_items: "{{ shinken_services }}"
   template:

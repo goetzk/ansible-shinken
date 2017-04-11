@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+{% set admin_users = [0] -%}
+{% for key, value in item.iteritems() %}
+	{% if key == 'is_admin' and value == '1' %}
+		{% set admin_users.append('item.name') %}
+	{% endif %}
+{% endfor %}
+
+define contactgroup{
+    contactgroup_name   admins
+    alias               admins
+    members             {{ admin_users }}
+}
+
