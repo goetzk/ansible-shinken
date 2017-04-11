@@ -1,18 +1,8 @@
 # {{ ansible_managed }}
 define contact{
-    {# loop through all key:value pairs and print out the results #}
+    {# loop through all key:value pairs and output the results #}
     {% for key, value in item.iteritems() %}
-
-    {% if key == 'contact_name' %}
-      {% if key is defined %}
-        {{ key }}       {{ value }}
-      {% else %}
-        {{ key }}             {{ value |mandatory }}
-      {% endif %}
-    {% else %}
-    {# Special case doesn't apply here #}
         {{ key }}      {{ value }}
-    {% endif %}
     {% endfor %}
 }
 
