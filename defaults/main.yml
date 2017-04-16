@@ -3,9 +3,6 @@
 # How should things be installed, 'packages' or 'pip'
 shinken_install_from: 'pip'
 
-# Where pip will install packages
-shinken_virtualenv: /srv/shinken/environment
-
 # Path of broker configuration
 shinken_config_broker: /etc/shinken/brokers/
 

@@ -11,12 +11,6 @@
     group: shinken
     system: yes
 
-# - name: Create directory for shinken to be installed to
-#   when: shinken_install_from == "pip"
-#   file:
-#     path: "{{ shinken_virtualenv }}"
-#     state: directory
-
 # needed to install shinken and its web ui
 - name: Install python-pip
   package:

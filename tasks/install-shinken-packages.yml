@@ -24,14 +24,10 @@
     name: pycurl
     version: 7.43.0
     state: present
-#    virtualenv: "{{ shinken_virtualenv }}"
-#    virtualenv_site_packages: yes
 
 - name: Install Shinken using pip
   when: shinken_install_from == "pip"
   pip: 
     name: Shinken
     state: present
-#    virtualenv: "{{ shinken_virtualenv }}"
-#    virtualenv_site_packages: yes
 

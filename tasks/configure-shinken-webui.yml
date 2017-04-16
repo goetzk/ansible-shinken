@@ -14,7 +14,6 @@
   pip:
     state: present
     name: "pymongo>=3.0.3 passlib requests arrow bottle==0.12.8"
-#     virtualenv: {{ shinken_virtualenv }}
 
 - name: Install mongodb for storing WebUI user preferences
   package:
