@@ -5,6 +5,7 @@
 #   template: src=webui-module.cfg.tmpl dest=/etc/shinken/modules/broker-webui.cfg
 #     owner=root group=root mode=444
 #   notify:
+#   - Validate configuration
 #   - restart shinken broker
 #   - restart shinken arbiter
 
@@ -41,6 +42,7 @@
     regexp='.*[^#] modules.*'
     line="    modules {{ shinken_broker_modules }}"
   notify:
+  - Validate configuration
   - restart shinken broker
   - restart shinken arbiter
 

@@ -7,6 +7,7 @@
     dest={{ shinken_config_contacts }}/{{ item.contact_name |mandatory }}.cfg
     mode=640
   notify:
+  - Validate configuration
   - restart shinken arbiter
 
 - name: Create configuration for services to monitor
@@ -15,6 +16,7 @@
     dest={{ shinken_config_services }}/{{ item.service_description|replace(' ', '_') }}.cfg
     src=services.cfg.tmpl
   notify:
+  - Validate configuration
   - restart shinken arbiter
 
 - name: Create configuration for hosts to monitor (without services)
@@ -23,6 +25,7 @@
     dest={{ shinken_config_hosts }}/{{ item.host_name }}.cfg
     src=hosts.cfg.tmpl
   notify:
+  - Validate configuration
   - restart shinken arbiter
 
 # Following Jinja magic thanks to mikecee
@@ -36,6 +39,7 @@
     dest={{ shinken_config_hostgroups }}/{{ item }}.cfg
     src=hostgroups.cfg.tmpl
   notify:
+  - Validate configuration
   - restart shinken arbiter
 
 - name: Install 'all' hostgroup
@@ -43,6 +47,7 @@
     dest={{ shinken_config_hostgroups }}/all.cfg
     src=hostgroups-all.cfg.tmpl
   notify:
+  - Validate configuration
   - restart shinken arbiter
 
 - name: Fix path to nagios plugins directory on RedHat family
@@ -53,5 +58,6 @@
     line: '$NAGIOSPLUGINSDIR$=/usr/lib64/nagios/plugins'
     state: present
   notify:
+  - Validate configuration
   - restart shinken arbiter
 

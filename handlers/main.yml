@@ -1,9 +1,11 @@
 ---
-- name: restart shinken arbiter
+- name: Validate configuration
+  # Service command can't be used as it doesn't support 'check'
   command: service shinken check
+
+- name: restart shinken arbiter
   service: name=shinken-arbiter state=restarted
 
 - name: restart shinken broker
-  command: service shinken check
   service: name=shinken-broker state=restarted
 
