@@ -1,0 +1,13 @@
+---
+
+- name: Check if /etc/tmpfiles.d exists (are we using systemd?)
+  stat:
+    path: /etc/tmpfiles.d
+  register: destination_exists
+
+- name: Install permissions override for [/var]/run/shinken
+  template:
+    dest: /etc/tmpfiles.d/run-shinken.conf
+    src: run-shinken-permissions.conf.tmpl
+  when: destination_exists.stat.isdir is defined and destination_exists.stat.isdir
+
