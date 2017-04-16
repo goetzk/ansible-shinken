@@ -1,7 +1,9 @@
 ---
 - name: restart shinken arbiter
+  command: service shinken check
   service: name=shinken-arbiter state=restarted
 
 - name: restart shinken broker
+  command: service shinken check
   service: name=shinken-broker state=restarted
 
