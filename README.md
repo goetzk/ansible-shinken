@@ -6,10 +6,12 @@ This role is to install Shinken and configure your hosts and services.
 Requirements
 ------------
 
-If installing through pip, no external dependencies should be required.
+This role requires sudo to be installed.
+
+If installing through pip, no other external dependencies should be required.
 
 This role has been tested on:
-- Debian Jessie (8.4)
+- Debian 8.x (Jessie)
 - Centos 6.8
 - Amazon Linux AMI release 2016.09
 
