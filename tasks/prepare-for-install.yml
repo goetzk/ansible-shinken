@@ -2,12 +2,13 @@
 - name: Create shinken group
   user:
     name: shinken
+    comment: Created by goetzk.shinken role
     system: yes
 
 - name: Create shinken user
   user:
     name: shinken
-    comment: Created by ansible-shinken
+    comment: Created by goetzk.shinken role
     group: shinken
     system: yes
 
